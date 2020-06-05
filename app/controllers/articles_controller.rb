@@ -20,4 +20,23 @@ class ArticlesController < ApplicationController
   end
 
   # add edit and update methods here
+
+  def edit 
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+    @article.update(article_params)
+    redirect_to article_path(@article)
+  end
+
+  private
+  # In controller actions, use this private method to access sea params from forms.
+  # Example: @sea.update(sea_params)
+  # check the return value of sea_params to see what you're working with!
+  def article_params
+    params.require(:article).permit(:title,:description)
+  end
+
 end
